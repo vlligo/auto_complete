@@ -95,22 +95,25 @@ int main() {
     while (istr >> s) {
         t.add_string(s);
     }
-    // int q;
-    // cin >> q;
-    // for (int i = 0; i < q; i++) {
-    //     string s;
-    //     cin >> s;
-    //     t.add_string(s);
-    // }
     cout << "Type any string and press enter. You will get all common words "
             "starting with the string you entered"
          << endl;
     while (cin >> s) {
         long long c = t.count(s);
-        if (c < 10) {
+        if (c == 0) {
+            cout << "No words with entered prefix" << endl;
+        } else if (c < 20) {
             auto ans = t.all_with_this_pref(s);
-            for (auto i : ans) {
-                cout << i << endl;
+            for (int i = 0; i < c; i++) {
+                cout << ans[i];
+                i++;
+                if (i >= c) {
+                    cout << endl;
+                    continue;
+                }
+                for (int j = 0; j < 20 - (int)ans[i - 1].size(); j++)
+                    cout << ' ';
+                cout << ans[i] << endl;
             }
         } else {
             cout << c << " possibilities, show?[Y/n]" << endl;
